@@ -89,8 +89,16 @@
       });
       // When 'new_tweet' events are fired, do something with the packaged tweet
       socket.on('new_tweet', function (tweet) {
-        console.log(tweet);
-        alert('Refreshing... check the console...');
+        console.log(tweet.name);
+        if(tweet.name !== undefined){
+          var tweetbox = document.getElementById("tweetfeed");
+          var li = document.createElement("li");
+          li.className = "tweets";
+          li.innerHTML = "<b>" + tweet.name + "</b>" + "<p>" + tweet.text + "</p>";
+          tweetbox.appendChild(li);
+        }
+        //tweetbox.write("<li class='tweet'>" + tweet.name + "</li>");
+        //alert('Refreshing... check the console...');
         // some logic to add the new tweet to the DOM…
 
       });

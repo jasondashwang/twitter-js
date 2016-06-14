@@ -25,12 +25,14 @@
     {% endif %}
       <h3>All Tweets</h3>
       <!-- display tweets here -->
-      {% for tweet in tweets %}
-        <li class = "tweets">
-          <b>{{tweet.name}}</b>
-          <p>{{tweet.text}}</p>
-        </li>
-      {% endfor %}
+      <ul id="tweetfeed">
+        {% for tweet in tweets %}
+          <li class = "tweets">
+            <b>{{tweet.name}}</b>
+            <p>{{tweet.text}}</p>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
 

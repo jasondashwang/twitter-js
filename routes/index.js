@@ -4,14 +4,16 @@ module.exports = function(io){
     // could use one line instead: var router = require('express').Router();
     var tweetBank = require('../tweetBank');
     var bodyParser = require('body-parser');
+    var socketio = require('socket.io');
+
     router.use(bodyParser.urlencoded({ extended: false}));
     router.use(bodyParser.json());
 
     router.post('/tweets/', function(req, res, next){
+      io.sockets.emit('new_tweet', { name: req.body.name, text: req.body.text});
       var name = req.body.name;
       var text = req.body.text;
       tweetBank.add(name, text);
-      res.redirect('/');
     });
     router.get('/', function (req, res) {
       var tweets = tweetBank.list();
@@ -27,12 +29,17 @@ module.exports = function(io){
       var tweets = tweetBank.find(function(object){
         return object.name === req.params.name;
       });
-      res.render('index', { title: 'All tweets by ' + req.params.name, tweets: tweets, userName: req.params.name,showForm: true});
+      res.render('index', { title: 'All tweets by ' + req.params.name, tweets: tweets, userName: req.params.name ,showForm: true});
     });
 
     router.get('/tweets/', function(req, res, next){
       var tweets = tweetBank.list();
-      res.render( 'index', { title: 'All tweets', tweets: tweets, showForm: false} );
+      res.render( 'index', { title: 'All tweets', tweets: tweets, userName: "", showForm: false} );
+    });
+
+    router.use(function (err, req, res, next) {
+    	if(err) console.err("You got an error");
+    	res.end();
     });
 
 
