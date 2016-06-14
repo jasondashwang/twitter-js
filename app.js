@@ -2,10 +2,11 @@ var express = require('express');
 var swig = require('swig');
 var tweetBank = require('./tweetBank');
 var routes = require('./routes');
+var socketio = require('socket.io');
 
 
 var app = new express();
-app.use('/', routes);
+app.use('/', routes(io));
 app.use(express.static('public'));
 
 app.engine('html', swig.renderFile);
@@ -18,5 +19,7 @@ swig.setDefaults({cache: false});
 
 
 
-app.listen(3000);
+var server = app.listen(3000);
+var io = socketio.listen(server);
+
 
