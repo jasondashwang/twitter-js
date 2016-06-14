@@ -1,13 +1,11 @@
 var express = require('express');
 var swig = require('swig');
-var tweetBank = require('./tweetBank') ;
+var tweetBank = require('./tweetBank');
+var routes = require('./routes');
+
 var app = new express();
-
-var swigInput = {
-  title: "An Example",
-  people: [{name: "Gandalf"},{name: "Frodo"}, {name: "Hermoine"}]
-}
-
+app.use('/', routes);
+app.use(express.static('public'));
 
 app.engine('html', swig.renderFile);
 
@@ -16,21 +14,18 @@ app.set('views', __dirname + '/views');
 
 swig.setDefaults({cache: false});
 
-app.get('/', function (req, res) {
-  res.render('index', swigInput);
-});
 
-app.get('/tweets/:tweetnumber', function(req, res, next){
-  res.render('singleTweet', tweetBank.data[+(req.params.tweetnumber)]);
-});
+// app.get('/tweets/:tweetnumber', function(req, res, next){
+//   res.render('singleTweet', tweetBank.list()[+(req.params.tweetnumber)]);
+// });
 
-app.get('/tweets/', function(req, res, next){
-  res.render('allTweets', tweetBank);
-});
+// app.get('/tweets/', function(req, res, next){
+//   res.render('allTweets', {data:tweetBank.list()});
+// });
 
-app.post('/tweets/', function(req, res, next){
+// app.post('/tweets/', function(req, res, next){
 
-});
+// });
 
 
 /*

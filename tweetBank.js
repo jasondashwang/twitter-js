@@ -35,6 +35,6 @@ for (var i = 0; i < 10; i++) {
   add( getFakeName(), getFakeTweet() );
 }
 
-module.exports = { add: add, list: list, find: find, data: data };
+module.exports = { add: add, list: list, find: find};
 
 
