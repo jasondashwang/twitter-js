@@ -1,0 +1,9 @@
+<h1>All Tweets</h1>
+<ul>
+{% for tweet in data %}
+  <li>
+  	<h3>{{ tweet.name }}</h3>
+  	<p>{{ tweet.text }}</p>
+  </li>
+{% endfor %}
+</ul>

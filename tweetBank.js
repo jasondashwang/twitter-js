@@ -14,8 +14,6 @@ function find (properties) {
   return _.cloneDeep(_.filter(data, properties));
 }
 
-module.exports = { add: add, list: list, find: find };
-
 // GENERATES FAKE TWEETS AND NAMES
 
 var randArrayEl = function(arr) {
@@ -34,7 +32,9 @@ var getFakeTweet = function() {
 };
 
 for (var i = 0; i < 10; i++) {
-  module.exports.add( getFakeName(), getFakeTweet() );
+  add( getFakeName(), getFakeTweet() );
 }
+
+module.exports = { add: add, list: list, find: find, data: data };
 
 

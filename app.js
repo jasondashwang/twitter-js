@@ -1,5 +1,6 @@
 var express = require('express');
 var swig = require('swig');
+var tweetBank = require('./tweetBank') ;
 var app = new express();
 
 var swigInput = {
@@ -17,6 +18,18 @@ swig.setDefaults({cache: false});
 
 app.get('/', function (req, res) {
   res.render('index', swigInput);
+});
+
+app.get('/tweets/:tweetnumber', function(req, res, next){
+  res.render('singleTweet', tweetBank.data[+(req.params.tweetnumber)]);
+});
+
+app.get('/tweets/', function(req, res, next){
+  res.render('allTweets', tweetBank);
+});
+
+app.post('/tweets/', function(req, res, next){
+
 });
 
 
