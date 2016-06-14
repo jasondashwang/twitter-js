@@ -2,7 +2,16 @@ var express = require('express');
 var router = express.Router();
 // could use one line instead: var router = require('express').Router();
 var tweetBank = require('../tweetBank');
+var bodyParser = require('body-parser');
+router.use(bodyParser.urlencoded({ extended: false}));
+router.use(bodyParser.json());
 
+router.post('/tweets/', function(req, res, next){
+  var name = req.body.name;
+  var text = req.body.text;
+  tweetBank.add(name, text);
+  res.redirect('/');
+});
 router.get('/', function (req, res) {
   var tweets = tweetBank.list();
   res.render( 'index', { title: 'Twitter.js', tweets: tweets, showForm: true} );
