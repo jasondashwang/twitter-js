@@ -10,6 +10,7 @@ module.exports = function(io){
     router.use(bodyParser.json());
 
     router.post('/tweets/', function(req, res, next){
+    console.log("is posting");
       io.sockets.emit('new_tweet', { name: req.body.name, text: req.body.text});
       var name = req.body.name;
       var text = req.body.text;

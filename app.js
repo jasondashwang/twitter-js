@@ -21,11 +21,9 @@ swig.setDefaults({cache: false});
 var server = app.listen(3000);
 var io = socketio.listen(server);
 
-io.on('connection', function(socket){
-  socket.emit('new_tweet', { });
-})
-
 app.use('/', routes(io));
+
+
 
 
 
