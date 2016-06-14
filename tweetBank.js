@@ -20,10 +20,11 @@ var randArrayEl = function(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 };
 
-var getFakeName = function() {
+var getFakeName = function(i) {
   var fakeFirsts = ['Nimit', 'Dave', 'Shanna', 'Charlotte', 'Scott', 'Ayana', 'Omri', 'Gabriel', 'Joe'];
   var fakeLasts = ['Hashington', 'Stackson', 'McQueue', 'OLogn', 'Ternary', 'Claujure', 'Dunderproto', 'Binder', 'Docsreader', 'Ecma'];
-  return randArrayEl(fakeFirsts) + " " + randArrayEl(fakeLasts);
+  return fakeFirsts[i] + "-"+ fakeLasts[i];
+  //return randArrayEl(fakeFirsts) + " " + randArrayEl(fakeLasts);
 };
 
 var getFakeTweet = function() {
@@ -32,8 +33,10 @@ var getFakeTweet = function() {
 };
 
 for (var i = 0; i < 10; i++) {
-  add( getFakeName(), getFakeTweet() );
+  add( getFakeName(i), getFakeTweet() );
 }
+
+add('Nimit-Hashington', "Hello There!")
 
 module.exports = { add: add, list: list, find: find};
 

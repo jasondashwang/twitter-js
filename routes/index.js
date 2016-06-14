@@ -10,12 +10,19 @@ router.get('/', function (req, res) {
 
 router.get('/tweets/:tweetnumber', function(req, res, next){
   var tweets = tweetBank.list();
-  res.render('index', { title: 'Twitter.js', tweets: [tweets[+(req.params.tweetnumber)]] });
+  res.render('index', { title: 'Tweet number ' + req.params.tweetnumber , tweets: [tweets[+(req.params.tweetnumber)]] });
+});
+
+router.get( '/users/:name', function(req, res, next){
+  var tweets = tweetBank.find(function(object){
+  	return object.name === req.params.name;
+  });
+  res.render('index', { title: 'All tweets by ' + req.params.name, tweets: tweets});
 });
 
 router.get('/tweets/', function(req, res, next){
   var tweets = tweetBank.list();
-  res.render( 'index', { title: 'Twitter.js', tweets: tweets } );
+  res.render( 'index', { title: 'All tweets', tweets: tweets } );
 });
 
 module.exports = router;
